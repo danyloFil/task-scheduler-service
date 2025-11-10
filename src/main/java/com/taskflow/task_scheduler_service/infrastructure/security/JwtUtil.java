@@ -15,14 +15,31 @@ public class JwtUtil {
     // Secret key used to sign and verify JWT tokens
     private final String secretKey = "your-super-secure-and-very-long-secret-key";
 
-    // Extracts the claims from the JWT token (additional token information)
+
     public Claims extractClaims(String token) {
-        return Jwts.parser()
-                .setSigningKey(Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8))) // Sets the secret key to validate the token signature
-                .build()
-                .parseClaimsJws(token) // Parses the JWT token and obtains the claims
-                .getBody(); // Returns the body of the claims
+        try {
+            return Jwts.parser()
+                    .setSigningKey(Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8)))
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("🔍 JWT DEBUG -> token: " + token);
+            System.out.println("🔍 JWT DEBUG -> key: " + secretKey);
+            throw new RuntimeException("JWT parse error: " + e.getClass().getSimpleName() + " - " + e.getMessage());
+        }
     }
+
+
+    // Extracts the claims from the JWT token (additional token information)
+    //public Claims extractClaims(String token) {
+      //  return Jwts.parser()
+       //         .setSigningKey(Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8))) // Sets the secret key to validate the token signature
+        //        .build()
+          //      .parseClaimsJws(token) // Parses the JWT token and obtains the claims
+            //    .getBody(); // Returns the body of the claims
+   // }
 
     // Extracts the email from the JWT token
     public String extractTokenEmail(String token) {
