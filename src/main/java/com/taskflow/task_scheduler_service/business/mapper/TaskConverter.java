@@ -13,7 +13,7 @@ public interface TaskConverter {
 
     TaskDTO convertToDTO(TasksEntity tasksEntity);
 
-    List<TaskDTO> toDtoList(List<TasksEntity> entities);
-    List<TasksEntity> toEntityList(List<TaskDTO> dtos);
+    List<TaskDTO> convertToDTOList(List<TasksEntity> entities);
+    List<TasksEntity> convertToEntityList(List<TaskDTO> dtos);
 
 }
