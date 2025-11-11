@@ -21,7 +21,7 @@ public class TasksEntity {
     private LocalDateTime creationDate;
     private LocalDateTime eventDate;
     private String userEmail;
-    private LocalDateTime updateAt;
+    private LocalDateTime updatedAt;
     private NotificationStatusEnum notificationStatusEnum;
 
 
